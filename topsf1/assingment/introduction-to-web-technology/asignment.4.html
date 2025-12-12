@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flexbox Layout</title>
+
+<style>
+    /* Basic page styling */
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    /* HEADER */
+    header {
+        background: #4A90E2;
+        color: white;
+        text-align: center;
+        padding: 15px;
+    }
+
+    /* MAIN LAYOUT USING FLEXBOX */
+    .container {
+        display: flex;
+        justify-content: space-between;   /* Controls spacing on main axis */
+        align-items: stretch;             /* Aligns items vertically */
+        min-height: 70vh;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+        background: #f0f0f0;
+        width: 25%;
+        padding: 20px;
+        border-right: 2px solid #ccc;
+    }
+
+    /* MAIN CONTENT */
+    .main-content {
+        background: #fff;
+        flex: 1;                           /* Takes remaining space */
+        padding: 20px;
+    }
+
+    /* FOOTER */
+    footer {
+        background: #333;
+        color: white;
+        text-align: center;
+        padding: 15px;
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 768px) {
+        .container {
+            flex-direction: column;      /* Stack layout for small screens */
+            align-items: center;
+        }
+
+        .sidebar, .main-content {
+            width: 100%;                 /* Full width on small screens */
+            text-align: center;
+        }
+    }
+</style>
+
+</head>
+<body>
+
+<header>
+    <h1>Flexbox Webpage Layout</h1>
+</header>
+
+<div class="container">
+    <div class="sidebar">
+        <h3>akash</h3>
+        <p>Links or menu items here</p>
+    </div>
+
+    <div class="main-content">
+        <h2>akash</h2>
+        <p>This is the central area of the layout.</p>
+    </div>
+</div>
+
+<footer>
+    <p>Footer Section</p>
+</footer>
+
+</body>
+</html>
