@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .tooltip-container {
+  position: relative;      /* Parent reference */
+  display: inline-block;
+  cursor: pointer;
+}
+
+.tooltip-text {
+  position: absolute;      /* Positioned relative to parent */
+  bottom: 50%;            /* Move tooltip above the element */
+  left: 50%;
+  /* transform: translateX(-50%); */
+  
+  background: #333;
+  color: #cf1616;
+  padding: 6px 50px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  /* pointer-events: none; */
+  
+}
+
+.tooltip-container:hover .tooltip-text {
+  opacity: 1;
+}
+        
+
+
+    </style>
+</head>
+<body>
+    
+        <div class="tooltip-container">
+  Hover over me
+  <span class="tooltip-text">This is a tooltip!</span>
+</div>
+     
+    
+
+    
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .f1{
+            display: flex;
+            text-decoration: none;
+            gap: 65px;
+            justify-content: center;
+            background-color: aqua;
+            height: 30px;
+            width: 100%;
+            text-align: center;
+            
+        }
+        .f1:hover{
+            background-color: aqua;
+            
+        }
+        .dropdown:hover{
+            display: block;
+        }
+        .dropdown-about li a{
+            padding: 25px;
+            white-space: nowrap;
+        }
+        .dropdwon-menu li a :hover{
+            background-color: red;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <nav>
+        <ul class="f1">
+            <li><a href="#">home</a></li>
+            <li><a href="#">menu</a></li>
+            <li><a href="#">about</a></li>
+            <li class="dropdown-about">
+                <a href="#">about</a>
+                <li><a href="#">web application</a></li>
+                <li><a href="#">python</a></li>
+                <li><a href="#">css</a></li>
+            </li>
+        </ul>
+
+    </nav>
+    
+</body>
+</html>

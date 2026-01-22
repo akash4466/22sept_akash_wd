@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flex + Grid + Hero + Footer</title>
+<link rel="stylesheet" href="style.css">
+<style>
+    body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between; /* left logo, right menu */
+    align-items: center;
+    background: #222;
+    padding: 15px 20px;
+    color: #fff;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 10px;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 35px;
+    background: #333;
+    min-width: 150px;
+    display: none;
+    flex-direction: column;
+    border-radius: 4px;
+    padding: 0;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* HERO SECTION */
+.hero {
+    margin-top: 70px; /* offset navbar */
+    background: #444 url('https://via.placeholder.com/1400x400') center/cover no-repeat;
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 18px;
+}
+
+/* MAIN GRID LAYOUT */
+.layout {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    padding: 20px;
+    gap: 20px;
+}
+
+/* SIDEBAR */
+.sidebar {
+    background: #f1f1f1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* CONTENT GRID */
+.content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: #ddd;
+    padding: 40px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+/* FOOTER */
+.footer {
+    background: black;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="logo">MyWebsite</div>
+    <section class="hero">
+    <h1>welcome to our website</h1>
+    
+  </section>
+
+    <ul class="nav-links">
+        <li class="dropdown">
+            <a href="#">Home</a>
+        </li>
+        <li class="dropdown">
+            <a href="#">Menu ▾</a>
+            <ul class="dropdown-menu">
+                <li><a href="#">address</a></li>
+                <li><a href="#">phone number</a></li>
+                <li><a href="#">location</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#">Contact ▾</a>
+            <ul class="dropdown-menu">
+                <li><a href="#">Email</a></li>

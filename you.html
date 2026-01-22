@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Global */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  padding-top: 70px; /* for fixed header */
+}
+
+/* ---------------- HEADER (position + flex) ---------------- */
+.header {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #222;
+  color: white;
+  padding: 15px 20px;
+
+  display: flex; 
+  justify-content: space-between;
+  align-items: center;
+
+  z-index: 10;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+}
+
+.menu a:hover {
+  text-decoration: underline;
+}
+
+/* ---------------- HERO (flex center) ---------------- */
+.hero {
+  height: 300px;
+  background: #555;
+  color: white;
+
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* ---------------- NAVIGATION CARDS (grid) ---------------- */
+.nav-grid {
+  padding: 30px;
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  padding: 25px;
+  background: #f1f1f1;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 1.2rem;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+    </style>
+</head>
+<body>
+    
+
+  <!-- HEADER (position + flex) -->
+  <header class="header">
+    <div class="logo">My Website</div>
+
+    <nav class="menu">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <h1>Welcome</h1>
+    <p>Enjoy our simple layout example</p>
+  </section>
+
+  <!-- NAVIGATION GRID (3 cards) -->
+  <section class="nav-grid">
+    <div class="card">Card 1</div>
+    <div class="card">Card 2</div>
+    <div class="card">Card 3</div>
+  </section>
+
+
+  
+
+
+    
+</body>
+</html>

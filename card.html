@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Layout for 3 cards */
+.card-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  justify-content: center;
+}
+
+/* Each Card */
+.card {
+  position: relative;
+  width: 300px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  padding: 15px;
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover Effect */
+.card:hover {
+  background: #eb10ff;               /* Light blue-ish hover background */
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  transform: translateY(-5px);       /* Slight lift */
+}
+
+.card img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* Badge styling */
+ .badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #444;
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+} 
+
+.badge.sale {
+  background: #ff5722;
+}
+
+.badge.hot {
+  background: #e91e63;
+}
+
+    </style>
+</head>
+<body>
+    <div class="card-container">
+  <div class="card">
+    <span class="badge">New</span>
+    <img src="https://via.placeholder.com/300x180" alt="">
+    <h3>Card One</h3>
+    
+  </div>
+
+  <div class="card">
+    <span class="badge sale">Sale</span>
+    <img src="https://via.placeholder.com/300x180" alt="">
+    <h3>Card Two</h3>
+    
+  </div>
+
+  <div class="card">
+    <span class="badge hot">Hot</span>
+    <img src="https://via.placeholder.com/300x180" alt="">
+    <h3>Card Three</h3>
+    
+  </div>
+</div>
+
+    
+</body>
+</html>

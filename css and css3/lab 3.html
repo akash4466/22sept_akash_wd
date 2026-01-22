@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Flexbox Layout</title>
+  <link rel="stylesheet" href="styles.css"> <!-- External CSS file -->
+  <style>
+    /* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Set body to fill the viewport */
+body {
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  flex-direction: column; /* Stack header, main, and footer vertically */
+  justify-content: space-between; /* Distribute space between elements */
+}
+
+/* Main container */
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Header */
+.header {
+  background-color: #4CAF50;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Main content area (side-by-side with Flexbox) */
+.main {
+  display: flex;
+  flex: 1; /* Allow the main area to grow and fill available space */
+  justify-content: flex-start; /* Align items to the start horizontally */
+  align-items: flex-start; /* Align items to the start vertically */
+  padding: 20px;
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: #f4f4f4;
+  width: 200px;
+  padding: 15px;
+  margin-right: 20px;
+  border-right: 2px solid #ccc;
+}
+
+/* Main content */
+.content {
+  flex: 1; /* Allow content to grow */
+  background-color: #e9e9e9;
+  padding: 15px;
+}
+
+/* Footer */
+.footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+  .main {
+    flex-direction: column; /* Stack the sidebar and content vertically on smaller screens */
+  }
+
+  .sidebar {
+    width: 100%; /* Sidebar takes full width */
+    margin-right: 0; /* Remove margin */
+    border-right: none; /* Remove border */
+    margin-bottom: 20px; /* Add space between sidebar and content */
+  }
+
+  .content {
+    width: 100%; /* Main content takes full width */
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>My Website</h1>
+    </header>
+    <div class="main">
+      <aside class="sidebar">
+        <h2>Sidebar</h2>
+        <p>Links and content for sidebar.</p>
+      </aside>
+      <section class="content">
+        <h2>Main Content</h2>
+        <p>This is the main content area.</p>
+      </section>
+    </div>
+    <footer class="footer">
+      <p>Footer content</p>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Webpage</title>
+  <link rel="stylesheet" href="styles.css"> <!-- External CSS file -->
+  <style>
+    /* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f4f4f4;
+}
+
+/* Navigation Bar Styling */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: white;
+  padding: 15px 30px;
+}
+
+.navbar .logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navbar .nav-links {
+  list-style-type: none;
+  display: flex;
+}
+
+.navbar .nav-links li {
+  margin-left: 20px;
+}
+
+.navbar .nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+}
+
+.navbar .nav-links li a:hover {
+  color: #f4f4f4;
+}
+
+/* Content Section Styling */
+.content {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.left-column, .right-column {
+  width: 48%; /* Each column takes up 48% of the width */
+}
+
+.left-column h2, .right-column h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.left-column p, .right-column p {
+  font-size: 16px;
+  color: #333;
+}
+
+/* Footer Styling */
+.footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+/* Media Query for Screens Below 768px */
+@media (max-width: 768px) {
+  /* Stack the columns vertically on small screens */
+  .content {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .left-column, .right-column {
+    width: 100%; /* Each column takes full width */
+    margin-bottom: 20px;
+  }
+
+  /* Adjust Navbar for mobile */
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+  }
+
+  .navbar .nav-links {
+    flex-direction: column;
+    width: 100%;
+    padding-left: 0;
+  }
+
+  .navbar .nav-links li {
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+
+  /* Improve font size and padding on mobile */
+  body {
+    font-size: 14px;
+  }
+
+  .navbar .logo {
+    font-size: 22px;
+  }
+
+  .navbar .nav-links li a {
+    font-size: 18px;
+  }
+
+  .left-column h2, .right-column h2 {
+    font-size: 20px;
+  }
+
+  .left-column p, .right-column p {
+    font-size: 14px;
+  }
+
+  .footer p {
+    font-size: 14px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">MyWebsite</div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Content Section -->
+  <div class="content">
+    <div class="left-column">
+      <h2>About Us</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque auctor nisl sit amet.</p>
+    </div>
+    <div class="right-column">
+      <h2>Our Services</h2>
+      <p>We offer a wide range of services including web development, design, and SEO optimization.</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 MyWebsite. All rights reserved.</p>
+  </footer>
+</body>
+</html>
