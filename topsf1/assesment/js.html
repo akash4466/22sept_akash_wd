@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>View Plant Reports</title>
+</head>
+
+<body style="font-family:Arial; margin:0; padding:0; background:#f4f4f4;">
+
+<div style="max-width:600px; margin:40px auto; padding:20px; background:white; border-radius:8px;">
+    <h2>All Plant Reports</h2>
+
+    <input type="text" id="search" placeholder="Search by name or location"
+    style="padding:10px; width:100%; margin-bottom:10px;">
+
+    <div id="reportsContainer"></div>
+
+    <button id="toggleMode"
+    style="margin-top:15px; padding:8px; cursor:pointer;">
+    Toggle Light/Dark
+    </button>
+</div>
+
+<script>
+class ViewReports {
+    constructor() {
+        this.container = document.getElementById("reportsContainer");
+        this.searchInput = document.getElementById("search");
+        this.loadReports();
+        this.addEvents();
+    }
+
+    loadReports() {
+        this.reports = JSON.parse(localStorage.getItem("plantReports")) || [];
+        this.render(this.reports);
+        sessionStorage.setItem("lastViewed", new Date().toLocaleString());
+    }
+
+    render(data) {
+        this.container.innerHTML = "";
+
+        if (data.length === 0) {
+            this.container.innerHTML = "<p>No data found</p>";
+            return;
+        }
+
+        data.forEach((report, index) => {
+            const div = document.createElement("div");
+            div.style.border = "1px solid #ccc";
+            div.style.padding = "10px";
+            div.style.marginBottom = "10px";
+
+            div.innerHTML = `
+                <h3>${report.name}</h3>
+                <p>Location: ${report.location}</p>
+                <p>Frequency: ${report.frequency} days</p>
+                <button onclick="deleteReport(${index})"
+                style="padding:5px; background:red; color:white; border:none;">
+                Delete
+                </button>
+            `;
+            this.container.appendChild(div);
+        });
+    }
+
+    addEvents() {
+        this.searchInput.addEventListener("input", () => {
+            const value = this.searchInput.value.toLowerCase();
+            const filtered = this.reports.filter(r =>
+                r.name.toLowerCase().includes(value) ||
+                r.location.toLowerCase().includes(value)
+            );
+            this.render(filtered);
+        });
+
+        document.getElementById("toggleMode").addEventListener("click", () => {
+            if (document.body.style.background === "black") {
+                document.body.style.background = "#f4f4f4";
+                document.body.style.color = "black";
+            } else {
+                document.body.style.background = "black";
+                document.body.style.color = "white";
+            }
+        });
+    }
+}
+
+function deleteReport(index) {
+    let reports = JSON.parse(localStorage.getItem("plantReports")) || [];
+    reports.splice(index, 1);
+    localStorage.setItem("plantReports", JSON.stringify(reports));
+    location.reload();
+}
+
+new ViewReports();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,126 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Urban Greentech - Plant Report</title>
+</head>
+
+<body style="font-family:Arial; margin:0; padding:0; background:#f4f4f4;">
+
+<div style="max-width:500px; margin:40px auto; padding:20px; background:white; border-radius:8px;">
+    <h2 style="text-align:center;">Plant Care Report</h2>
+
+    <form id="plantForm" style="display:flex; flex-direction:column; gap:10px;">
+
+        <input type="text" id="plantName" placeholder="Plant Name" required
+        style="padding:10px; font-size:14px;">
+
+        <select id="location" required
+        style="padding:10px;">
+            <option value="">Select Location</option>
+            <option>Balcony</option>
+            <option>Bedroom</option>
+            <option>Kitchen</option>
+            <option>Living Room</option>
+        </select>
+
+        <input type="number" id="frequency" placeholder="Watering Frequency (days)" required
+        style="padding:10px;">
+
+        <input type="date" id="lastWatered" required
+        style="padding:10px;">
+
+        <textarea id="notes" placeholder="Plant Condition Notes"
+        style="padding:10px;"></textarea>
+
+        <button type="submit"
+        style="padding:10px; background:green; color:white; border:none; cursor:pointer;">
+        Submit Report
+        </button>
+
+        <div id="messageBox" style="margin-top:10px; padding:8px;"></div>
+
+    </form>
+
+    <br>
+    <a href="view.html">View Reports</a>
+</div>
+
+<script>
+class PlantReportHandler {
+    constructor() {
+        this.form = document.getElementById("plantForm");
+        this.messageBox = document.getElementById("messageBox");
+        this.init();
+    }
+
+    init() {
+        document.addEventListener("submit", (e) => {
+            if (e.target.id === "plantForm") {
+                e.preventDefault();
+                this.handleSubmit();
+            }
+        });
+
+        this.form.addEventListener("input", () => this.validateForm());
+    }
+
+    validateForm() {
+        const name = plantName.value.trim();
+        const freq = frequency.value;
+        const date = new Date(lastWatered.value);
+        const notesText = notes.value.trim();
+
+        if (name.length < 3)
+            return this.showMessage("Plant name must be ≥ 3 characters", "red");
+
+        if (freq <= 0)
+            return this.showMessage("Frequency must be > 0", "red");
+
+        if (date >= new Date())
+            return this.showMessage("Last watered must be a past date", "red");
+
+        if (notesText.length < 15)
+            return this.showMessage("Notes must be ≥ 15 characters", "red");
+
+        this.showMessage("Validation Passed ✔", "green");
+        return true;
+    }
+
+    handleSubmit() {
+        if (!this.validateForm()) return;
+
+        const data = {
+            name: plantName.value,
+            location: location.value,
+            frequency: frequency.value,
+            lastWatered: lastWatered.value,
+            notes: notes.value
+        };
+
+        this.saveToLocalStorage(data);
+        this.clearForm();
+        this.showMessage("Report Saved Successfully!", "green");
+    }
+
+    saveToLocalStorage(data) {
+        let reports = JSON.parse(localStorage.getItem("plantReports")) || [];
+        reports.push(data);
+        localStorage.setItem("plantReports", JSON.stringify(reports));
+    }
+
+    clearForm() {
+        this.form.reset();
+    }
+
+    showMessage(message, color) {
+        this.messageBox.textContent = message;
+        this.messageBox.style.background = color === "red" ? "#f8d7da" : "#d4edda";
+    }
+}
+
+new PlantReportHandler();
+</script>
+
+</body>
+</html>
