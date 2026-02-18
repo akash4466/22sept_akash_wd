@@ -1,0 +1,131 @@
+1. JavaScript Introduction
+
+Q1: JavaScript is a high-level, interpreted programming language mainly used to make web pages interactive.
+It runs in the browser and allows dynamic content updates.
+
+It handles user actions, form validation, animations, and communication with servers.
+Q2: JavaScript runs mainly in browsers, while Python is commonly used for backend and data science, and Java is used for enterprise and Android apps.
+Java is compiled and strongly typed, whereas JavaScript is interpreted and loosely typed.
+JavaScript is primarily used for web interactivity.
+
+Q3: The <script> tag is used to include JavaScript code inside an HTML file.
+It can contain internal JavaScript or link an external .js file.
+External file linking is done using: <script src="script.js"></script>.
+
+2. Variables and Data Types
+
+Q1: Variables store data values in JavaScript.
+var is function-scoped, let is block-scoped, and const is block-scoped but cannot be reassigned.
+Example: let age = 20;
+
+Q2: JavaScript data types include String, Number, Boolean, Undefined, Null, Object, and Symbol.
+Example: "Hello" (String), 25 (Number), true (Boolean).
+Arrays and functions are special types of objects.
+
+Q3: undefined means a variable is declared but not assigned a value.
+null is an intentional empty value assigned by the programmer.
+undefined is automatic, while null is manually set.
+
+3. JavaScript Operators
+
+Q1: Arithmetic operators perform math operations like +, -, *, /.
+Comparison operators like ==, ===, >, < compare values.
+Logical operators like &&, ||, ! combine conditions.
+
+Q2: == compares values but allows type conversion.
+=== compares both value and data type.
+=== is stricter and recommended.
+
+4. Control Flow (If-Else, Switch)
+
+Q1: Control flow determines the order in which code executes.
+if-else statements run code based on conditions.
+Example: if (x > 0) { console.log("Positive"); }.
+
+Q2: The switch statement checks a variable against multiple cases.
+It is useful when comparing one value against many fixed options.
+It improves readability over multiple if-else statements.
+
+5. Loops (For, While, Do-While)
+
+Q1: A for loop runs a set number of times.
+A while loop runs while a condition is true.
+
+A do-while loop runs at least once before checking the condition.
+Q2: A while loop checks the condition first.
+A do-while loop executes once before checking.
+So do-while guarantees at least one execution.
+
+6. Functions
+
+Q1: Functions are reusable blocks of code.
+Syntax: function greet() { console.log("Hi"); }.
+
+They are called using the function name followed by parentheses.
+Q2: A function declaration defines a named function.
+A function expression stores a function inside a variable.
+Function expressions are not hoisted like declarations.
+
+Q3: Parameters are inputs passed into a function.
+Return values send results back from the function.
+Example: return a + b;.
+
+7. Arrays
+
+Q1: An array stores multiple values in a single variable.
+Declared as: let arr = [1, 2, 3];.
+
+Elements are accessed using index numbers starting from 0.
+Q2: push() adds an element at the end.
+pop() removes the last element.
+shift() removes the first, and unshift() adds at the beginning.
+
+8. Objects
+
+Q1: An object stores data in key-value pairs.
+Example: {name: "John", age: 25}.
+Arrays use index numbers, while objects use property names.
+
+Q2: Dot notation: obj.name.
+Bracket notation: obj["name"].
+Bracket notation is useful when property names are dynamic.
+
+9. JavaScript Events
+
+Q1: Events are actions like clicks, key presses, or mouse movements.
+Event listeners detect and respond to these events.
+They make web pages interactive.
+
+Q2: addEventListener() attaches an event handler to an element.
+Example: button.addEventListener("click", function(){ alert("Clicked"); });.
+It allows multiple event handlers for the same event.
+
+10. DOM Manipulation
+
+Q1: The DOM (Document Object Model) represents the HTML structure as objects.
+JavaScript interacts with the DOM to change content and styles.
+It allows dynamic updates without reloading the page.
+
+Q2: getElementById() selects an element by ID.
+getElementsByClassName() selects elements by class name.
+querySelector() selects the first matching CSS selector.
+
+11. JavaScript Timing Events
+
+Q1: setTimeout() runs code after a specified delay.
+setInterval() runs code repeatedly at fixed intervals.
+They are used for animations, clocks, and delayed actions.
+
+Q2: Example:
+setTimeout(function(){ alert("Hello"); }, 2000);
+This displays a message after 2 seconds.
+
+12. JavaScript Error Handling
+
+Q1: Error handling manages runtime errors in code.
+try tests code, catch handles errors, and finally runs regardless of error.
+It prevents program crashes.
+
+Q2: Error handling improves program stability and user experience.
+It helps detect and manage unexpected issues.
+It makes debugging and maintenance easier.
