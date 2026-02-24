@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Urban Greentech - Plant Care</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    margin:0;
+    padding:0;
+    background:#f4f4f4;
+    transition:0.3s;
+}
+header{
+    background:#2e7d32;
+    color:white;
+    padding:15px;
+    text-align:center;
+}
+.container{
+    padding:20px;
+}
+form{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+}
+.form-group{
+    flex:1 1 45%;
+    display:flex;
+    flex-direction:column;
+}
+textarea{
+    resize:none;
+}
+button{
+    padding:10px;
+    background:#2e7d32;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+button:hover{
+    opacity:0.8;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+th,td{
+    border:1px solid #ccc;
+    padding:8px;
+    text-align:center;
+}
+.message{
+    padding:10px;
+    margin-top:10px;
+}
+.success{background:#c8e6c9;}
+.error{background:#ffcdd2;}
+.dark{
+    background:#121212;
+    color:white;
+}
+.dark header{
+    background:#1b5e20;
+}
+@media(max-width:768px){
+    .form-group{
+        flex:1 1 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>🌿 Urban Greentech - Plant Care Report</h2>
+<button id="toggleMode">Toggle Light/Dark</button>
+</header>
+
+<div class="container">
+
+<form id="plantForm">
+    <div class="form-group">
+        <label>Plant Name</label>
+        <input type="text" id="plantName" required>
+    </div>
+
+    <div class="form-group">
+        <label>Location</label>
+        <select id="location" required>
+            <option value="">Select</option>
+            <option>Balcony</option>
+            <option>Bedroom</option>
+            <option>Kitchen</option>
+            <option>Living Room</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Watering Frequency (days)</label>
+        <input type="number" id="frequency" required>
+    </div>
+
+    <div class="form-group">
+        <label>Last Watered Date</label>
+        <input type="date" id="lastWatered" required>
+    </div>
+
+    <div class="form-group" style="flex:1 1 100%;">
+        <label>Plant Condition Notes</label>
+        <textarea id="notes" rows="4" required></textarea>
+    </div>
+
+    <div style="flex:1 1 100%;">
+        <button type="submit">Submit Report</button>
+    </div>
+</form>
+
+<div id="messageBox"></div>
+
+<hr>
+
+<h3>View Reports</h3>
+<input type="text" id="search" placeholder="Search by Plant or Location">
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Location</th>
+<th>Frequency</th>
+<th>Last Watered</th>
+<th>Notes</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody id="reportTable"></tbody>
+</table>
+
+<p id="noData"></p>
+
+</div>
+
+<script>
+class PlantReportHandler{
+
+    constructor(){
+        this.form = document.getElementById("plantForm");
+        this.messageBox = document.getElementById("messageBox");
+        this.table = document.getElementById("reportTable");
+        this.noData = document.getElementById("noData");
+
+        this.form.addEventListener("submit", (e)=>this.handleSubmit(e));
+        this.form.addEventListener("input", (e)=>this.realTimeValidate(e)); // event delegation
+    }
+
+    validateForm(data){
+        if(data.name.length < 3) return "Plant name must be at least 3 characters";
+        if(data.frequency <= 0) return "Frequency must be greater than 0";
+
+        let today = new Date();
+        let inputDate = new Date(data.lastWatered);
+        if(inputDate > today) return "Last watered date must be in past";
+
+        if(data.notes.length < 15) return "Notes must be minimum 15 characters";
+        return null;
+    }
+
+    saveToLocalStorage(data){
+        let reports = JSON.parse(localStorage.getItem("reports")) || [];
+        reports.push(data);
+        localStorage.setItem("reports", JSON.stringify(reports));
+    }
+
+    clearForm(){
+        this.form.reset();
+    }
+
+    showMessage(msg,type){
+        this.messageBox.innerHTML = `<div class="message ${type}">${msg}</div>`;
+        setTimeout(()=> this.messageBox.innerHTML="",3000);
+    }
+
+    handleSubmit(e){
+        e.preventDefault();
+
+        let data={
+            name: plantName.value.trim(),
+            location: location.value,
+            frequency: parseInt(frequency.value),
+            lastWatered: lastWatered.value,
+            notes: notes.value.trim()
+        };
+
+        let error = this.validateForm(data);
+        if(error){
+            this.showMessage(error,"error");
+            return;
+        }
+
+        this.saveToLocalStorage(data);
+        this.showMessage("Report Saved Successfully!","success");
+        this.clearForm();
+        this.renderReports();
+    }
+
+    realTimeValidate(e){
+        if(e.target.id==="plantName" && e.target.value.length<3){
+            e.target.style.border="2px solid red";
+        }else{
+            e.target.style.border="";
+        }
+    }
+
+    renderReports(){
+        let reports = JSON.parse(localStorage.getItem("reports")) || [];
+        this.table.innerHTML="";
+
+        if(reports.length===0){
+            this.noData.textContent="No data found";
+            return;
+        }else{
+            this.noData.textContent="";
+        }
+
+        reports.forEach((r,index)=>{
+            this.table.innerHTML+=`
+            <tr>
+                <td>${r.name}</td>
+                <td>${r.location}</td>
+                <td>${r.frequency}</td>
+                <td>${r.lastWatered}</td>
+                <td>${r.notes}</td>
+                <td><button onclick="deleteReport(${index})">Delete</button></td>
+            </tr>`;
+        });
+
+        sessionStorage.setItem("lastViewed", new Date().toLocaleString());
+    }
+}
+
+function deleteReport(index){
+    let reports = JSON.parse(localStorage.getItem("reports"));
+    reports.splice(index,1);
+    localStorage.setItem("reports",JSON.stringify(reports));
+    app.renderReports();
+}
+
+document.getElementById("toggleMode").addEventListener("click",()=>{
+    document.body.classList.toggle("dark");
+});
+
+document.getElementById("search").addEventListener("input",function(){
+    let keyword = this.value.toLowerCase();
+    let rows = document.querySelectorAll("#reportTable tr");
+
+    rows.forEach(row=>{
+        row.style.display = row.innerText.toLowerCase().includes(keyword) ? "" : "none";
+    });
+});
+
+const app = new PlantReportHandler();
+app.renderReports();
+</script>
+
+</body>
+</html>
