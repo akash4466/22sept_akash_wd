@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Post</title>
+  <!-- Google Fonts Link -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"> <!-- External CSS file -->
+  <style>
+    /* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+  font-family: 'Roboto', sans-serif; /* Default font for body text */
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+  padding: 20px;
+}
+
+/* Blog Post Container */
+.blog-post {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Post Title */
+.post-title {
+  font-family: 'Merriweather', serif; /* Font for titles */
+  font-size: 3rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 15px;
+  line-height: 1.2;
+}
+
+/* Post Subtitle */
+.post-subtitle {
+  font-family: 'Merriweather', serif; /* Font for subtitles */
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: #555;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+/* Post Content */
+.post-content {
+  font-size: 1rem;
+  font-family: 'Roboto', sans-serif; /* Font for body text */
+  color: #444;
+  line-height: 1.8;
+  margin-bottom: 15px;
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+  /* Post Title */
+  .post-title {
+    font-size: 2.5rem; /* Smaller title on mobile */
+  }
+
+  /* Post Subtitle */
+  .post-subtitle {
+    font-size: 1.5rem; /* Smaller subtitle on mobile */
+  }
+
+  /* Post Content */
+  .post-content {
+    font-size: 1.1rem; /* Slightly larger text for better readability */
+  }
+}
+
+@media (max-width: 480px) {
+  /* Post Title */
+  .post-title {
+    font-size: 2rem; /* Further reduce title size on very small screens */
+  }
+
+  /* Post Subtitle */
+  .post-subtitle {
+    font-size: 1.3rem; /* Further reduce subtitle size */
+  }
+
+  /* Post Content */
+  .post-content {
+    font-size: 1.2rem; /* Increase font size for small screens */
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="blog-post">
+    <header>
+      <h1 class="post-title">The Importance of Web Design</h1>
+      <h2 class="post-subtitle">Why Good Design Matters in Web Development</h2>
+    </header>
+    <article>
+      <p class="post-content">
+        Web design plays a critical role in shaping how users perceive and interact with your website. A well-designed website not only looks aesthetically pleasing but also ensures a seamless user experience (UX). Whether you're building a blog, an e-commerce site, or a portfolio, the design is integral to attracting and retaining visitors.
+      </p>
+      <p class="post-content">
+        Effective web design incorporates intuitive navigation, fast loading times, and mobile-friendly layouts. Additionally, color schemes, typography, and imagery are crucial elements that contribute to a site's visual identity. A clean, simple design often leads to higher user engagement and retention.
+      </p>
+    </article>
+  </div>
+</body>
+</html>
