@@ -1,4 +1,10 @@
-list1 = ['apple', 'banana', 'mango']
+n=int(input("enter the pair you want:"))
+akash={}
 
-for fruit in list1:
-    print(fruit)
+for i in range(n):
+    keys=(input("enter the key:"))
+    value=(input("enter the value:"))
+    akash[keys]=value
+
+print("final value",akash.items())  
+

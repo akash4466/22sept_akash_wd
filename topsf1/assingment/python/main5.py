@@ -1,13 +1,23 @@
-num = int(input("Enter number: "))
-flag = 0
+stdata={
+    'id':1,
+    'name':'akash',
+    'sub':'math',
 
-if num > 1:
-    for i in range(2, num):
-        if num % i == 0:
-            flag = 1
-            break
 
-if flag == 0:
-    print("Prime")
+}
+'''print(stdata)'''
+'''print(stdata['id'])'''
+'''print(stdata.keys())'''
+'''print(stdata.values())'''
+'''for i,j in stdata.items():
+    print(i,j)'''
+'''for i in stdata.items():
+    print(i)'''
+'''if 'akash' in stdata.values():
+    print("well-done:")
 else:
-    print("Not Prime")
+    print("not-good:")'''
+
+
+
+
