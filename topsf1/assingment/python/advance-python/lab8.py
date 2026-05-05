@@ -16,4 +16,3 @@ class B(A):
 
 obj = B()
 obj.show()
-

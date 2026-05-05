@@ -1,7 +1,3 @@
-name = input("Enter your name: ")
-age = int(input("Enter your age: "))
-print(f"Name: {name}, Age: {age}")
-
 s = input("Enter string: ")
 i = int(input("Enter integer: "))
 f = float(input("Enter float: "))

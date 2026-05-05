@@ -1,14 +1,6 @@
-rt=[]
-n=int(input("give:"))
+def even_numbers():
+    for i in range(2, 21, 2):
+        yield i
 
-for i in range(n):
-    id=int(input("enter the id:"))
-    name=input("enter the name:")
-
-    no={
-        'id':id,
-        'name':name
-    }
-    rt.append(no)
-
-print(rt)
+for num in even_numbers():
+    print(num)

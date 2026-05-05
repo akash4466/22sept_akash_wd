@@ -15,4 +15,3 @@ class Demo:
 obj = Demo()
 obj.show()
 print("Global:", x)
-
