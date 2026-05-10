@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+</head>
+
+<body style="background-color: aliceblue;">
+    <h1 style="text-align: center;color: blue;">Welcome to DBProject</h1>
+    <hr>
+    <form method="post">
+        {%csrf_token%}
+        <input type="text" name="name" placeholder="Name"> <br><br>
+        <input type="email" name="email" placeholder="Email"> <br><br>
+        <input type="date" name="dob" placeholder="DOB"> <br><br>
+        <input type="number" name="mobil" placeholder="Mobil"> <br><br>
+        <textarea name="address" id="" placeholder="Address"></textarea> <br><br>
+        <input type="submit">
+    </form>
+    <hr>
+    <a href="/showdata">Showdata</a>
+</body>
+
+</html>
+
+from django.db import models
+
+# Create your models here.
+class stud(models.Model):
+    name=models.CharField(max_length=20)
+    email=models.EmailField()
+    dob=models.DateField()
+    mobil=models.BigIntegerField()
+    address=models.TextField()
+
+
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Showdata</title>
+</head>
+
+<body style="background-color: aliceblue;">
+    <h1 style="text-align: center;color: blue;">Showdata</h1>
+    <hr>
+    <!-- {{stdata}} -->
+
+    <!-- {% for i in stdata %}
+    {{i.id}}
+    {{i.name}}
+    {{i.email}}
+    {{i.mobile}}
+    {% endfor %} -->
+
+    <table border="2" align="center">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>DOB</th>
+            <th>Mobile</th>
+            <th>Action</th>
+        </tr>
+        {% for i in stdata %}
+        <tr>
+            <td>{{i.id}}</td>
+            <td>{{i.name}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.dob}}</td>
+            <td>{{i.mobil}}</td>
+            <td><a href="/update/{{i.id}}">Update</a>
+                <a href="/deletedata/{{i.id}}">Delete</a>
+            </td>
+        </tr>
+        {% endfor%}
+    </table>
+</body>
+
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+</head>
+
+<body style="background-color: aliceblue;">
+    <h1 style="text-align: center;color: blue;">Updatedata</h1>
+    <hr>
+    <form method="post">
+        {%csrf_token%}
+        <input type="text" value="{{stid.name}}" name="name" placeholder="Name"> <br><br>
+        <input type="email" value="{{stid.email}}" name="email" placeholder="Email"> <br><br>
+        <input type="date" name="dob" value="{{stid.dob|date:'Y-m-d'}}" placeholder="dob"> <br><br>
+        <input type="number" name="mobil" value="{{stid.mobil}}" placeholder="Mobil"> <br><br>
+        <textarea name="address" id="" placeholder="Address">{{stid.address}}</textarea> <br><br>
+        <input type="submit">
+    </form>
+    <hr>
+    <a href="/showdata">Showdata</a>
+</body>
+
+</html>
+
+from django.shortcuts import render,redirect
+from .forms import *
+from .models import *
+
+# Create your views here.
+def index(request):
+    if request.method=='POST':
+        form=Studform(request.POST)
+        if form.is_valid():
+            form.save()
+            print("record inserted:")
+        else:
+            print("form.errors")
+    return render(request,'index.html')
+
+
+def showdata(request):
+    stdata=stud.objects.all()
+    return render(request,'showdata.html',{'stdata':stdata})
+def deletedata(request,id):
+    stid=stud.objects.get(id=id)
+    stud.delete(stid)
+    return redirect('showdata')
+def update(request,id):
+    stid=stud.objects.get(id=id)
+    if request.method=='POST':
+        form=Studform(request.POST,instance=stid)
+        if form.is_valid():
+            form.save()
+            print("Record updated!")
+            return redirect('showdata')
+        else:
+            print(form.errors)
+    return render(request,'update.html',{'stid':stid})
+
+    from django.contrib import admin
+from django.urls import path,include
+from newapp import views
+
+urlpatterns = [
+   path('',views.index),
+   path('showdata/',views.showdata,name='showdata'),
+   path('deletedata/<int:id>',views.deletedata),
+   path('update/<int:id>',views.update),
+]
+
+"""
+URL configuration for student project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/6.0/topics/http/urls/
+ Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path,include
+
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('',include('newapp.urls')),
+]
