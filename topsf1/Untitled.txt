@@ -1,0 +1,198 @@
+
+from django.contrib import admin
+from django.urls import path,include
+from .import views
+
+urlpatterns = [
+    path('',views.index,name='index'),
+   
+    path('showdata/',views.showdata,name='showdata'),
+    path('delete/<int:id>/',views.deletedata,name='deletedata'),
+    path('update/<int:id>/',views.update,name='update'),
+    
+]
+
+from django.contrib import admin
+from django.urls import path,include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('',include('subtree.urls')),
+]
+from django.contrib import admin
+from .models import student
+
+# Register your models here.
+admin.site.register(student)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+
+        <label>name:</label>
+        <input type="text" name="name">
+        <br><br>
+
+        <label>email:</label>
+        <input type="email" name="email">
+        <br><br>
+
+        <label>mobile:</label>
+        <input type="text" name="mobile">
+        <br><br>
+
+        <button type="submit">save</button>
+        <td><a href="/showdata/">show</a></td>
+    </form>
+    
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="2">
+        <tr>
+            <th>Id</th>
+            <th>name</th>
+            <th>email</th>
+            <th>mobile</th>
+            <th>actions</th>
+        </tr>
+        {% for i in data %}
+            <tr>
+                <td>{{i.id}}</td>
+                <td>{{i.name}}</td>
+                <td>{{i.email}}</td>
+                <td>{{i.mobile}}</td>
+
+                <td>
+                    <a href="/update/{{i.id}}/">edit</a>
+                    <a href="/delete/{{i.id}}/">delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+    </table>
+    <a href="/">add new</a>
+    
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+
+        <label>name:</label>
+        <input type="text" name="name" value="{{data.name}}">
+        <br><br>
+
+        <label>email:</label>
+        <input type="email" name="email"  value="{{data.email}}">
+        <br><br>
+
+        <label>mobile:</label>
+        <input type="text" name="mobile"  value="{{data.mobile}}">
+        <br><br>
+
+        <button type="submit">update</button>
+    </form>
+    
+</body>
+</html>
+
+from django.db import models
+
+# Create your models here.
+class student(models.Model):
+    name=models.CharField(max_length=30)
+    email=models.EmailField()
+    mobile=models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name
+
+from django import forms
+from .models import student
+class studentform(forms.ModelForm):
+    class meta:
+        model = student
+
+        fields=['name','email','mobile']
+
+from django.shortcuts import render, redirect
+from .models import student
+
+
+# Home Page + Insert Data
+def index(request):
+
+    if request.method == 'POST':
+
+        name = request.POST['name']
+        email = request.POST['email']
+        mobile = request.POST['mobile']
+
+        student.objects.create(
+            name=name,
+            email=email,
+            mobile=mobile
+        )
+
+        return redirect('showdata')
+
+    return render(request, 'index.html')
+
+
+# Show Data
+def showdata(request):
+
+    data = student.objects.all()
+
+    return render(request, 'showdata.html', {'data': data})
+
+
+# Delete Data
+def deletedata(request, id):
+
+    data = student.objects.get(id=id)
+
+    data.delete()
+
+    return redirect('showdata')
+
+
+# Update Data
+def update(request, id):
+
+    data = student.objects.get(id=id)
+
+    if request.method == 'POST':
+
+        data.name = request.POST['name']
+        data.email = request.POST['email']
+        data.mobile = request.POST['mobile']
+
+        data.save()
+
+        return redirect('showdata')
+
+    return render(request, 'update.html', {'data': data})
